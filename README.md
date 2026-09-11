@@ -62,27 +62,50 @@ This reviewer is an **Agent Skill** — an open format that most AI tools now un
 can use it in Claude, ChatGPT/Codex, Cursor, VS Code with Copilot, and around forty other
 tools. The only thing that differs between them is which folder they look in.
 
-**Step one, whichever tool you use:** download this repository. Click the green **Code**
-button at the top of the GitHub page, then **Download ZIP**, and unzip it somewhere you'll
-find again — your Documents folder is fine.
-
-Then find your tool below.
+Find your tool below.
 
 | If you use… | What to do |
 |---|---|
-| **Claude Cowork**, the **Claude desktop app**, or **Claude Code** | Nothing. Point Claude at the unzipped folder and the reviewer is already there. |
-| **Cursor**, or **VS Code with Copilot** | Nothing. Both read the same folder Claude uses. Open the unzipped folder and it's available. |
-| **ChatGPT or Codex** | One extra step — see just below. |
-| **claude.ai in a browser** | Upload it to your account — see below. |
+| **claude.ai** in a browser | Download [`gw-design-review.zip`](https://github.com/gw-ospo/gwospo-design/raw/main/gw-design-review.zip) and upload it — see below. |
+| **Claude Cowork**, the **Claude desktop app**, or **Claude Code** | Download the repository (below) and point Claude at the folder. Nothing to install. |
+| **Cursor**, or **VS Code with Copilot** | Same as Claude — both read the same folder. |
+| **ChatGPT or Codex** | Download the repository, then one extra copy step — see below. |
 | **Anything else** | Use the no-setup method at the bottom. It works everywhere. |
+
+> **Downloading the repository** means: click the green **Code** button at the top of the
+> GitHub page, then **Download ZIP**, and unzip it somewhere you'll find again. Your
+> Documents folder is fine.
+
+### claude.ai in a browser
+
+**Do not upload the repository ZIP here** — Claude will reject it with an error about the
+MD file needing to be at the top level. That ZIP wraps everything in extra folders, so
+Claude can't find the skill inside it.
+
+Use the ready-made package instead. There is no zipping or compressing to do:
+
+1. Download [**`gw-design-review.zip`**](https://github.com/gw-ospo/gwospo-design/raw/main/gw-design-review.zip).
+   (On the GitHub page it's the file called `gw-design-review.zip` — click it, then click
+   the download button.)
+2. In Claude's **Settings**, find **Capabilities → Skills**.
+3. Click **Upload skill** and choose the file you just downloaded. Don't unzip it first.
+
+The menu wording moves around from time to time — look for anything called **Skills**.
+
+Once it's uploaded it works in every conversation, so this is a one-time setup.
+
+### Claude Cowork, Claude desktop, Claude Code, Cursor, VS Code
+
+Download the repository as described above, then point your tool at the unzipped folder.
+The reviewer is already inside it and loads automatically — there's nothing to install.
 
 ### ChatGPT and Codex
 
-Codex looks in a folder called `.agents/skills` instead. Copy the reviewer there once:
+Codex looks in a folder called `.agents/skills` instead. After downloading the repository:
 
 1. In the unzipped folder, open `.claude/skills` and copy the `gw-design-review` folder.
-2. Make a folder called `.agents` at the top level of the unzipped folder, and a folder
-   called `skills` inside it.
+2. At the top level of the unzipped folder, make a folder called `.agents`, and inside that
+   one called `skills`.
 3. Paste `gw-design-review` into `.agents/skills`.
 
 Folders starting with a dot are hidden on a Mac — press
@@ -90,16 +113,6 @@ Folders starting with a dot are hidden on a Mac — press
 
 If you'd rather have it available in every project, put the folder in `.agents/skills`
 inside your home folder instead.
-
-### claude.ai in a browser
-
-Skills can be added to your account, and then they work in any conversation.
-
-1. In the unzipped folder, find `.claude/skills/gw-design-review`.
-2. Compress **that folder** into its own ZIP file — right-click it and choose *Compress*.
-3. In Claude's **Settings**, find **Capabilities → Skills** and upload that ZIP.
-
-The menu wording moves around from time to time — look for anything called **Skills**.
 
 ### No setup at all — works in any AI tool
 
@@ -178,6 +191,24 @@ Do **not** solve this with a symlink. GitHub's *Download ZIP* converts symlinks 
 text files containing the target path, and downloading the ZIP is the route this README
 sends non-technical users down. If `.agents/skills/` ever needs to work out of the box,
 commit a second real copy and add a check that the two stay identical.
+
+### `gw-design-review.zip` must be rebuilt when the skill changes
+
+`gw-design-review.zip` at the repository root is the upload package for claude.ai. It is a
+**committed build artifact**, so it goes stale unless you rebuild it:
+
+```sh
+sh scripts/build-skill-zip.sh
+```
+
+The script stages a clean copy, strips `.DS_Store`, and verifies that the archive contains
+`gw-design-review/SKILL.md` at exactly that depth before it exits.
+
+Why it exists: claude.ai rejects an upload whose `SKILL.md` is nested deeper than one
+folder. GitHub's own *Download ZIP* wraps everything in `gwospo-design-main/`, which puts
+`SKILL.md` four levels down — so students who uploaded the repository ZIP got
+"the MD file must be in the top-level folder". The README now sends them to this file
+instead and tells them explicitly not to upload the repository ZIP.
 
 <details>
 <summary>Using it from the command line</summary>
