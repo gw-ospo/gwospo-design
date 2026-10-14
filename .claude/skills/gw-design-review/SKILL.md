@@ -88,7 +88,9 @@ under "Checks run" in the report.
 ## Step 3 — Check brand compliance
 
 Read `references/brand-checks.md` and work through it. It covers colour, typography, logo
-usage, the pattern, accessibility, and voice as numbered checks with pass conditions.
+usage, the pattern, accessibility, and voice as numbered checks with pass conditions. Each
+check is tagged with its source — `DESIGN.md`, WCAG, or house practice — and only the first
+two can make a finding Must fix.
 
 **If the project contains its own `DESIGN.md`, that file is the source of truth.** Read it
 and re-derive any value that disagrees with the reference. The reference exists so the
@@ -122,8 +124,8 @@ client can publish shareable pages, offer that when the report is going to be sh
 - **Rank and cap the list.** Three strengths, then findings ordered by severity. Ten
   findings that get acted on beat forty that get ignored.
 - **Keep brand rules and judgment apart.** If `DESIGN.md` does not cover something, say so
-  and label it a judgment call rather than a violation — students learn to discount a
-  reviewer who presents taste as rules.
+  and label it house practice or a judgment call rather than a violation — students learn
+  to discount a reviewer who presents taste as rules.
 - **Describe the change; leave the rebuilding to them.** The report says what to change
   and why. Rebuilding the file is a separate request, and doing it uninvited takes away the
   learning.

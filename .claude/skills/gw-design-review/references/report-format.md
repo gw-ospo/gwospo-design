@@ -10,11 +10,14 @@ Use exactly these three, and label every finding with one.
 
 | Level | Meaning |
 |---|---|
-| **Must fix** | Breaks a stated brand rule in `DESIGN.md`, or fails WCAG AA. Not a matter of taste — the piece cannot ship this way. |
-| **Should fix** | Breaks a design principle in a way that measurably costs the reader: hierarchy, grouping, or legibility. |
+| **Must fix** | Breaks a stated brand rule in `DESIGN.md`, or fails WCAG AA — a check tagged `[DESIGN.md §x]` or `[WCAG x.x.x]` in `brand-checks.md`. Not a matter of taste — the piece cannot ship this way. |
+| **Should fix** | Breaks a design principle in a way that measurably costs the reader (hierarchy, grouping, or legibility), or fails a `[House practice]` check. |
 | **Consider** | A judgment call that would improve the piece. Say plainly that it is an opinion. |
 
-Never label a personal preference "Must fix". Credibility is the whole currency of a review.
+A house-practice check never makes a finding Must fix, however confident you are. If
+something feels like it should be a rule and `DESIGN.md` is silent, say so in the finding;
+the fix for that is adding it to `DESIGN.md`, not stretching an existing rule. Credibility is
+the whole currency of a review.
 
 ## Structure
 
@@ -68,8 +71,10 @@ under Who Attends". A student cannot act on a finding they cannot locate.
 **Give a value, not a direction.** "More spacing" is not actionable. "Cut the space between
 the bullets to 5 pt and open the gap between blocks to 18 pt" is.
 
-**Cite the rule.** `DESIGN.md` §3 (clear space), WCAG AA, or the principle by name. This
-teaches the student where to look next time, and it separates rules from your opinion.
+**Cite the rule.** `DESIGN.md` §3 (clear space), WCAG AA (1.4.3), the principle by name,
+or "house practice" with the check ID. Quote the rule as `DESIGN.md` actually words it, not
+a stronger paraphrase. This teaches the student where to look next time, and it separates
+rules from your opinion.
 
 **One finding per problem.** If the same misalignment repeats on six pages, that is one
 finding that says "on every page", not six findings.
@@ -77,23 +82,34 @@ finding that says "on every page", not six findings.
 **Rank across the whole piece, not per page.** The reader wants the most important thing
 first, wherever it is.
 
-### Worked example
+### Worked examples
 
-> **3. Section headings fail contrast on white**
-> *Where:* "Who Attends?", "Why Sponsor?" and "Conference Highlights" — pages 3, 4, 5
-> *Rule:* `DESIGN.md` §1.5 — never set text in OSCON Gold, Green, or Orchid on white
-> *What's happening:* the headings are set in OSCON Green `#33A56E` on white, which measures
-> 3.11:1. That clears WCAG only for large text, and the brand rule reserves the extended
-> accents for shapes and fills regardless of size. Three different accent colours across
-> three headings also breaks the repetition the section headings should be building.
-> *Fix:* set all section headings in GW Blue `#033C5A` (11.68:1). If you want the accent
-> colour present, put it in a small square or rule above the heading — that is a shape, which
-> the accents are for, and repeating one motif across all sections is stronger than three
-> different coloured headings.
+The same pages produce two findings at different severities, because one breaks a
+requirement and the other is house practice.
 
-Note what that example does: locates it, cites the rule, gives the measured number, explains
-*two* problems (contrast and repetition), and offers a fix that keeps what the student was
-reaching for.
+> **2. Section heading on page 3 is unreadable**
+> *Where:* the "Who Attends?" heading, page 3
+> *Rule:* WCAG AA contrast (1.4.3) — required for digital assets by `DESIGN.md` §1.5
+> *What's happening:* the heading is set in OSCON Gold `#FFD34D` on white, which measures
+> 1.43:1. That is far below 3:1, the minimum even for large text, so on most screens the
+> heading barely shows.
+> *Fix:* set it in GW Blue `#033C5A` (11.68:1), and see finding 6 for the other headings.
+
+> **6. Section headings change colour from page to page**
+> *Where:* "Why Sponsor?" (OSCON Green, page 4) and "Conference Highlights" (OSCON Orchid,
+> page 5), alongside the Gold heading in finding 2
+> *Rule:* Repetition, plus house practice (brand-checks A3) — not a `DESIGN.md` rule
+> *What's happening:* both pass WCAG at this size (Green 3.11:1 as large text, Orchid
+> 4.97:1), so neither breaks a rule. But three accent colours across three headings break the
+> repetition the headings should be building: the reader cannot learn "this colour means a
+> new section".
+> *Fix:* set all section headings in GW Blue. If you want the accent colour present, put it
+> in a small square above each heading — a shape, which is where `DESIGN.md` §1.5 points the
+> accents — and use the same square in every section.
+
+Note what these do: each locates the problem and cites its source. The Must fix rests on a
+measured number against a stated requirement. The Should fix says outright that it is
+house practice. And the fix keeps what the student was reaching for.
 
 ## Length
 

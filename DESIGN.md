@@ -48,8 +48,9 @@ Three brand typefaces (all on Adobe Fonts):
 
 Rules:
 - Pair two typefaces per asset (three permissible, never required); mix weights for visual interest.
-- Web fallbacks: Gazzetta → 'Gazzetta', 'Arial Narrow', sans-serif (condensed); Avenir Next → 'Avenir Next', 'Avenir', 'Segoe UI', sans-serif; Source Serif → 'Source Serif 4', Georgia, serif.
+- Web fallbacks: Gazzetta → 'Gazzetta', 'Avenir Next Condensed', 'Arial Narrow', sans-serif (condensed); Avenir Next → 'Avenir Next', 'Avenir', 'Segoe UI', sans-serif; Source Serif → 'Source Serif 4', Georgia, serif.
 - Suggested scale (1920×1080 slides): Gazzetta display 96–160; Avenir Next subhead 36–48; body 24–28 (never below 24); captions 24.
+- Print minimum: body text no smaller than 9 pt at US Letter size.
 - Headline color: GW Blue on light grounds; white or Gold on GW Blue/Navy Yard.
 
 ## 3. Logo
@@ -57,6 +58,8 @@ Rules:
 - Structure: 2×3 tile grid — GW monogram + "2027" square in GW Blue, five glyph squares (Potomac, Row House, Gold, Orchid, Green) with white knockout shapes — beside the "OPEN SOURCE CONFERENCE" wordmark in GW Blue.
 - Knockouts are transparent: place on white or very light grounds only. A reversed/dark-ground variant does not exist yet.
 - Clear space: at least one tile-width (the grid square) on all sides; minimum width ~200 px on screen.
+- Place the logo as supplied, vector where possible: never stretch, recolor, rotate, outline, shadow, or rebuild it from parts.
+- In a multi-page document, place the logo on the cover and back cover only; a standalone piece carries it once. Do not repeat it on interior pages.
 
 ## 4. Pattern
 - File: `GW_OSCON_pattern_2027_B_extended.svg` (PNG: `GW_OSCON_pattern_2027_B_extended.png`, 4195×1680).
