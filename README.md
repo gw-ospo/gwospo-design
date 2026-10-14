@@ -33,7 +33,8 @@ Findings come in three flavours, so you know what's urgent:
 
 ### Before you ask, have three answers ready
 
-The reviewer will ask you these, because the advice genuinely changes depending on them:
+The advice genuinely changes depending on these. The reviewer works out what it can from the
+file itself and asks about the rest, so saying them up front saves a round trip:
 
 1. **What is it, and where will it end up?** A printed 11×17 poster, a 16:9 slide, an
    Instagram post, a web page. Type that's fine on a poster is illegible on a phone.
@@ -230,7 +231,7 @@ ln -s "$PWD/.claude/skills/gw-design-review" ~/.claude/skills/gw-design-review
 
 A symlink stays current as this repository is updated; use `cp -R` to pin a copy instead.
 
-The two checkers are plain Python and are useful on their own. Claude runs them for you
+The helper scripts are plain Python and are useful on their own. Claude runs them for you
 during a review, so you only need these if you want a number quickly:
 
 ```bash
@@ -240,12 +241,18 @@ cd .claude/skills/gw-design-review
 python3 scripts/contrast.py "#FFD34D" "#033C5A"
 python3 scripts/contrast.py --palette
 
-# Which colours are actually in a graphic, matched against the brand palette
+# Which colours are actually in a graphic (PNG, JPEG, or PDF), matched against the palette
 python3 scripts/palette_audit.py ~/Desktop/poster.png
+
+# Render PDF pages to PNGs, named by page number
+python3 scripts/rasterize.py ~/Desktop/prospectus.pdf --pages 2-4
 ```
 
 `contrast.py` has no dependencies. `palette_audit.py` needs Pillow (`pip install Pillow`)
 and should be run on graphics rather than photographs — photographic content is exempt from
-the palette, and the script says so in its output.
+the palette, and the script says so in its output. `rasterize.py` (and `palette_audit.py`
+on a PDF) needs one of pdftoppm, Ghostscript, `pip install pypdfium2`, or PyMuPDF; the
+error message says which to install. Add `--design path/to/DESIGN.md` to `contrast.py` or
+`palette_audit.py` to read the palette from a project's own `DESIGN.md`.
 
 </details>

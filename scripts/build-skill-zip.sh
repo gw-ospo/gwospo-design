@@ -30,6 +30,7 @@ STAGE=$(mktemp -d)
 trap 'rm -rf "$STAGE"' EXIT
 cp -R "$SKILL_DIR" "$STAGE/gw-design-review"
 find "$STAGE" -name '.DS_Store' -delete
+find "$STAGE" \( -name '__pycache__' -o -name '*.pyc' \) -prune -exec rm -rf {} + 2>/dev/null || true
 find "$STAGE" -name '__MACOSX' -type d -exec rm -rf {} + 2>/dev/null || true
 
 ( cd "$STAGE" && zip -q -r -X "$OUT" gw-design-review )

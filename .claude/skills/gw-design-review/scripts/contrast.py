@@ -3,9 +3,10 @@
 
 Usage
 -----
-    python3 contrast.py "#033C5A" "#FFFFFF"     one pair
+    python3 contrast.py "#033C5A" "#FFFFFF"     one pair (foreground, background)
     python3 contrast.py --palette               every brand colour vs the common grounds
     python3 contrast.py --palette --all         full matrix, every pair
+    python3 contrast.py --palette --design DESIGN.md   use the project's palette
 
 Thresholds: 4.5:1 for normal text, 3.0:1 for large text (>=18pt, or >=14pt bold),
 3.0:1 for UI components and meaningful graphical objects.
@@ -13,34 +14,15 @@ Thresholds: 4.5:1 for normal text, 3.0:1 for large text (>=18pt, or >=14pt bold)
 No third-party dependencies.
 """
 
+import argparse
+import os
 import sys
 
-PALETTE = [
-    ("GW Blue",       "#033C5A", "core"),
-    ("Navy Yard",     "#00223E", "core"),
-    ("Potomac",       "#0075C8", "core"),
-    ("Row House",     "#EF4343", "core"),
-    ("GW Buff",       "#D6BF91", "core"),
-    ("White",         "#FFFFFF", "core"),
-    ("OSCON Gold",    "#FFD34D", "oscon"),
-    ("OSCON Green",   "#33A56E", "oscon"),
-    ("OSCON Orchid",  "#B04A8F", "oscon"),
-    ("Parchment",     "#FFEFAE", "pastel"),
-    ("Patina",        "#ADCAB8", "pastel"),
-    ("Blossom",       "#D1A0B9", "pastel"),
-    ("Blue Fog",      "#52C9E8", "pastel"),
-]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # also works under python -I
+from gw_palette import load_palette, parse_hex  # noqa: E402
 
-GROUNDS = ["#FFFFFF", "#033C5A", "#00223E"]
-
-
-def parse_hex(value):
-    s = value.strip().lstrip("#")
-    if len(s) == 3:
-        s = "".join(c * 2 for c in s)
-    if len(s) != 6:
-        raise ValueError(f"not a hex colour: {value!r}")
-    return tuple(int(s[i:i + 2], 16) for i in (0, 2, 4))
+# The grounds most GW pieces actually sit on. Names, so a DESIGN.md palette can supply them.
+GROUND_NAMES = ["White", "GW Blue", "Navy Yard"]
 
 
 def relative_luminance(rgb):
@@ -69,28 +51,35 @@ def verdict(ratio):
     return "FAIL — shapes and fills only, never text"
 
 
-def name_for(hex_value):
+def name_for(hex_value, palette):
     target = parse_hex(hex_value)
-    for name, hx, _ in PALETTE:
+    for name, hx, _ in palette:
         if parse_hex(hx) == target:
             return name
-    return hex_value.upper()
+    return f"#{hex_value.lstrip('#').upper()} (not in palette)"
 
 
-def report_pair(fg, bg):
+def report_pair(fg, bg, palette):
     ratio = contrast_ratio(fg, bg)
-    print(f"{name_for(fg)} ({fg.upper()}) on {name_for(bg)} ({bg.upper()})")
+    print(f"{name_for(fg, palette)} on {name_for(bg, palette)}")
     print(f"  ratio  {ratio:6.2f}:1")
     print(f"  {verdict(ratio)}")
 
 
-def report_palette(full=False):
-    grounds = [hx for _, hx, _ in PALETTE] if full else GROUNDS
+def report_palette(palette, full=False):
+    if full:
+        grounds = [hx for _, hx, _ in palette]
+    else:
+        by_name = {name: hx for name, hx, _ in palette}
+        grounds = [by_name[n] for n in GROUND_NAMES if n in by_name]
+        if not grounds:     # a DESIGN.md that renamed the grounds: use lightest and darkest
+            ordered = sorted(palette, key=lambda e: relative_luminance(parse_hex(e[1])))
+            grounds = [ordered[-1][1], ordered[0][1]]
     for bg in grounds:
-        print(f"\nOn {name_for(bg)} ({bg.upper()})")
+        print(f"\nOn {name_for(bg, palette)} ({bg.upper()})")
         print(f"  {'colour':<16}{'hex':<10}{'ratio':>8}   verdict")
         print("  " + "-" * 74)
-        for name, hx, group in PALETTE:
+        for name, hx, group in palette:
             if parse_hex(hx) == parse_hex(bg):
                 continue
             ratio = contrast_ratio(hx, bg)
@@ -101,22 +90,30 @@ def report_palette(full=False):
 
 
 def main(argv):
-    args = argv[1:]
-    if not args or args[0] in ("-h", "--help"):
-        print(__doc__)
+    parser = argparse.ArgumentParser(
+        description="WCAG contrast ratios for the GW / OSCON palette.",
+        epilog='example: contrast.py "#FFD34D" "#FFFFFF"')
+    parser.add_argument("colours", nargs="*", metavar="HEX",
+                        help="foreground and background, e.g. '#033C5A' '#FFFFFF'")
+    parser.add_argument("--palette", action="store_true",
+                        help="every palette colour against White, GW Blue and Navy Yard")
+    parser.add_argument("--all", action="store_true", help="with --palette: every pair")
+    parser.add_argument("--design", metavar="DESIGN.md",
+                        help="read the palette from the project's DESIGN.md")
+    args = parser.parse_args(argv[1:])
+
+    palette, source = load_palette(args.design)
+
+    if args.palette:
+        print(f"Palette: {source}")
+        report_palette(palette, full=args.all)
         return 0
-    if args[0] == "--palette":
-        report_palette(full="--all" in args)
-        return 0
-    if len(args) != 2:
-        print("error: give two hex colours, or --palette\n", file=sys.stderr)
-        print(__doc__, file=sys.stderr)
-        return 2
+    if len(args.colours) != 2:
+        parser.error("give two hex colours (foreground, background), or --palette")
     try:
-        report_pair(args[0], args[1])
+        report_pair(args.colours[0], args.colours[1], palette)
     except ValueError as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2
+        parser.error(str(exc))
     return 0
 
 

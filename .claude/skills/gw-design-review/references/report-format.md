@@ -21,6 +21,8 @@ Never label a personal preference "Must fix". Credibility is the whole currency 
 ```markdown
 # Design review — <piece name>
 <Medium and final size> · Reviewed <date> · Against DESIGN.md + the four design principles
+<Anything you inferred rather than were told — medium, audience, OSCON vs general OSPO —
+in one line, e.g. "Assumed: US Letter print, sponsor audience, OSCON." Omit if all stated.>
 
 ## The one-line read
 <What the piece is doing well and the single biggest thing holding it back. Two sentences.>
@@ -54,7 +56,8 @@ section and nothing else, so choose it carefully.>
 
 ## Checks run
 <Which objective checks were run and their results — contrast pairs tested, palette audit
-output. Include the numbers so the student can re-run them.>
+output. Include the numbers so the student can re-run them. List any check that could not
+run, and why (for example, Pillow unavailable), so its absence is not read as a pass.>
 ```
 
 ## Writing the findings
@@ -114,7 +117,7 @@ reaching for.
 
 ## Delivery
 
-Write the report to a Markdown file in the working directory
-(`design-review-<piece>-<YYYY-MM-DD>.md`) and send it to the user. If it is going to be
-shared with a team or discussed in a meeting, offer to publish it as an artifact — but do
-not publish without asking, since a review names someone's work.
+Write the report as a Markdown file named `design-review-<piece>-<YYYY-MM-DD>.md` — in
+the working directory if you have one, otherwise as a downloadable file — and give it to
+the user. If it is going to be shared with a team or discussed in a meeting and your client
+can publish shareable pages, offer that, but ask first: a review names someone's work.

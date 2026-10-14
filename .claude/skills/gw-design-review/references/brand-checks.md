@@ -92,8 +92,8 @@ newspaper-derived; at length it stops being readable.
 **T3 — Nothing below the floor.**
 Pass: no body text below 24 pt on a 1920×1080 slide, or below roughly 9 pt in Letter-size
 print. Captions and legal type still have to be legible at arm's length.
-Common failure: shrinking body copy to make content fit. The fix is less content or another
-page, never smaller type.
+Common failure: shrinking body copy to make content fit. Smaller type trades a layout
+problem for a legibility problem, so the fix is less content or another page.
 
 **T4 — Headline colour.**
 Pass: GW Blue on light grounds; white or Gold on GW Blue / Navy Yard.

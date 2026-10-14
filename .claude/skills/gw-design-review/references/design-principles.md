@@ -1,22 +1,8 @@
 # The four design principles
 
 Robin Williams, *The Non-Designer's Design Book* — **proximity, alignment, repetition,
-contrast**. They are not style preferences. They are the four ways a layout communicates
-structure before anyone reads a word, and every one of them is diagnosable and fixable.
-
-Work through all four. They interact, but they fail independently.
-
----
-
-## 0. First, the squint test
-
-Before you evaluate anything, look at the whole piece small — as a thumbnail, or by
-stepping back from the screen. Note what your eye lands on **first, second, third**.
-
-Then ask: is that the order the message needs?
-
-If a decorative graphic reads before the headline, or four elements tie for first place,
-that is the review's headline finding. Everything below is the diagnosis of *why*.
+contrast**. Work through all four after the squint test: they interact, but they fail
+independently.
 
 ---
 
@@ -24,9 +10,6 @@ that is the review's headline finding. Everything below is the diagnosis of *why
 
 > Items related to each other should be grouped close together. Space goes **between**
 > groups, not inside them.
-
-**What it does.** Proximity tells the reader what belongs to what, before they read
-anything. It is the cheapest organising tool available and it costs no ink.
 
 **What to look for**
 - Even spacing from top to bottom. If a sub-point sits as far from its parent as from the
@@ -52,9 +35,6 @@ delete the box you no longer need.
 > Nothing should be placed on the page arbitrarily. Every element should have a visual
 > connection to something else on the page.
 
-**What it does.** Alignment creates the invisible lines that make a page look intentional.
-Its absence is rarely noticed consciously — it just registers as amateurish.
-
 **What to look for**
 - Multiple left edges. Headings, body copy, images, and captions each starting a few
   millimetres apart is the single most common cause of "it looks off but I can't say why".
@@ -79,9 +59,6 @@ a decision when everything else is locked to the grid.
 
 > Repeat some aspect of the design throughout the entire piece. Repetition is what makes
 > separate pages read as one document.
-
-**What it does.** Repetition builds a system. Once a reader learns that a small coloured
-rule means "new section", every later rule does its work instantly.
 
 **What to look for**
 - **Repeating the logo instead of the system.** This is the classic GW OSCON failure. A mark
@@ -111,9 +88,6 @@ Write them down so the next person can follow them.
 > If two items are not exactly the same, then make them very different. Timid difference
 > reads as a mistake.
 
-**What it does.** Contrast creates hierarchy — it tells the eye where to go first — and it
-is what makes a page interesting enough to enter at all.
-
 **What to look for**
 - Type sizes too close together. A heading at 14 pt over body at 12 pt reads as an error,
   not a hierarchy. Aim for a real jump; a 2–3× ratio between display and body is normal.
@@ -131,21 +105,17 @@ is what makes a page interesting enough to enter at all.
 **Diagnostic question.** Convert the page to greyscale and squint. Is there still a clear
 first, second, and third? If the hierarchy vanishes without colour, it was never built.
 
-**Fix pattern.** Double the difference you first reached for. And be careful: contrast is
-the principle most often applied *and then undone* by making everything loud.
+**Fix pattern.** Double the difference you first reached for — and check it was not then
+undone by making everything else loud too.
 
 ---
 
 ## 5. The thing behind all four: white space
 
-None of the four principles can operate without room. Proximity needs space to group with,
-alignment needs a margin to hang from, repetition needs a rhythm to repeat into, and
-contrast needs a quiet field to be loud against.
+None of the four principles can operate without room. When a layout is crowded, the useful
+advice is almost never "add a graphic" or "make it smaller". It is **give it more room** —
+cut content, or add a page. A six-page document that wants to be eight pages is not a
+design problem with a design solution; it is a pagination decision that unlocks all four
+principles at once.
 
-So when a layout is crowded, the useful advice is almost never "add a graphic" or "make it
-smaller". It is **give it more room** — cut content, or add a page. A six-page document that
-wants to be eight pages is not a design problem with a design solution; it is a pagination
-decision that unlocks all four principles at once.
-
-White space is not wasted space. It is the cheapest tool in the kit and the one students
-are most reluctant to spend.
+Students are reluctant to spend white space, so expect to argue for it.
