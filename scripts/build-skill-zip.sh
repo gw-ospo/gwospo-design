@@ -23,6 +23,8 @@ cd "$(dirname "$0")/.."
 
 [ -f "$SKILL_DIR/SKILL.md" ] || { echo "error: $SKILL_DIR/SKILL.md not found" >&2; exit 1; }
 
+python3 scripts/check-palette.py
+
 rm -f "$OUT"
 
 # Stage a clean copy so the archive root is the skill folder itself.

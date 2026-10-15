@@ -10,8 +10,10 @@ metadata:
 # GW design review
 
 Produce a written review of a piece of graphic design: what works, what breaks a brand
-rule, what breaks a design principle, and exactly what to change. The reader is usually a
-student worker who is learning, so the report has to teach, not just grade.
+rule, what breaks a design principle, and exactly what to change.
+
+The brand lives in `brand/`. Read `brand/profile.md` first: it names the institution, the
+brand contexts and what each allows, and who reads the review.
 
 ## Before you start
 
@@ -23,8 +25,9 @@ request first:
    type sizes, contrast tolerances, and margin advice all depend on this.
 2. **Audience and the one action.** A sponsorship prospectus, a call for papers, and a
    schedule poster fail in different ways. The content usually makes this clear.
-3. **OSCON or general GW OSPO work.** This decides whether the OSCON extended accents (Gold,
-   Green, Orchid) are allowed at all — they are OSCON-only, never university colours.
+3. **Brand context.** `brand/profile.md` lists the contexts — for GW, OSCON or general
+   OSPO work — and what each permits. This decides whether the OSCON extended accents
+   (Gold, Green, Orchid) are allowed at all.
 
 Ask only about what the file and request leave open. State what you inferred in the report
 header, so the student can correct a wrong assumption.
@@ -75,8 +78,9 @@ SKILL=$(dirname "$(find . ~/.claude/skills ~/.agents/skills -maxdepth 6 -name SK
 | `python3 "$SKILL/scripts/contrast.py" --palette [--all]` | The whole brand palette against the usual grounds (or every pair) | Nothing |
 | `python3 "$SKILL/scripts/palette_audit.py" design.png` | Dominant flat colours matched against the brand palette; also accepts a PDF | Pillow |
 
-If the project has a `DESIGN.md`, add `--design path/to/DESIGN.md` to `contrast.py` and
-`palette_audit.py` so they use its palette; both print which palette they used.
+Both scripts read the palette from `brand/palette.json`. If the project being reviewed has
+its own `DESIGN.md` or `palette.json`, add `--design path/to/that/file` so they use it
+instead; both print which palette they used.
 
 Run `palette_audit.py` on graphics rather than photographs — photographic content is exempt
 from the palette, and the script's output says so.
@@ -92,9 +96,10 @@ usage, the pattern, accessibility, and voice as numbered checks with pass condit
 check is tagged with its source — `DESIGN.md`, WCAG, or house practice — and only the first
 two can make a finding Must fix.
 
-**If the project contains its own `DESIGN.md`, that file is the source of truth.** Read it
-and re-derive any value that disagrees with the reference. The reference exists so the
-skill still works outside this repository.
+The checks are derived from the brand specification, `brand/DESIGN.md`. Read the relevant
+section when a finding turns on the exact wording of a rule, so you quote it as written.
+**If the project being reviewed has its own `DESIGN.md`, that file is the source of truth
+instead.** Read it and re-derive any check whose values or wording disagree with it.
 
 ## Step 4 — Check the four principles
 

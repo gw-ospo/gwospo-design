@@ -1,0 +1,36 @@
+{
+  "source": "DESIGN.md §1. The rules for using these colours stay in DESIGN.md; this file holds the values the scripts need, and must match DESIGN.md.",
+  "groups": {
+    "core": {
+      "label": "GW core",
+      "section": "DESIGN.md §1.1"
+    },
+    "oscon": {
+      "label": "OSCON extended accent",
+      "section": "DESIGN.md §1.2",
+      "scope": "OSCON materials only, never presented as university colours"
+    },
+    "pastel": {
+      "label": "Pastel original",
+      "section": "DESIGN.md §1.4",
+      "role": "Large quiet backgrounds and tints"
+    }
+  },
+  "colors": [
+    {"name": "GW Blue",      "hex": "#033C5A", "group": "core",   "role": "Primary anchor: wordmarks, headlines, dark shapes"},
+    {"name": "Navy Yard",    "hex": "#00223E", "group": "core",   "role": "Darkest tone: backgrounds, small dark shapes"},
+    {"name": "Potomac",      "hex": "#0075C8", "group": "core",   "role": "Vivid blue accent: workhorse mid color"},
+    {"name": "Row House",    "hex": "#EF4343", "group": "core",   "role": "Vivid red accent"},
+    {"name": "White",        "hex": "#FFFFFF", "group": "core",   "role": "Breathing room, knockout shapes"},
+    {"name": "GW Buff",      "hex": "#D6BF91", "group": "core",   "role": "Warm neutral, formal contexts only"},
+    {"name": "OSCON Gold",   "hex": "#FFD34D", "group": "oscon",  "derived_from": "Parchment"},
+    {"name": "OSCON Green",  "hex": "#33A56E", "group": "oscon",  "derived_from": "Patina"},
+    {"name": "OSCON Orchid", "hex": "#B04A8F", "group": "oscon",  "derived_from": "Blossom"},
+    {"name": "Parchment",    "hex": "#FFEFAE", "group": "pastel"},
+    {"name": "Patina",       "hex": "#ADCAB8", "group": "pastel"},
+    {"name": "Blossom",      "hex": "#D1A0B9", "group": "pastel"},
+    {"name": "Blue Fog",     "hex": "#52C9E8", "group": "pastel"}
+  ],
+  "working_palette": ["GW Blue", "Potomac", "Row House", "OSCON Gold", "OSCON Green", "OSCON Orchid", "White"],
+  "grounds": ["White", "GW Blue", "Navy Yard"]
+}

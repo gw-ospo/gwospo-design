@@ -4,7 +4,7 @@ Graphic design materials for the George Washington University Open Source Progra
 
 | What | It is |
 |---|---|
-| [`DESIGN.md`](DESIGN.md) | Our design specification — the GW brand colours and typefaces, plus the OSCON palette, logo, and pattern rules. If you make anything for OSPO or OSCON, this is the rulebook. |
+| [`DESIGN.md`](.claude/skills/gw-design-review/brand/DESIGN.md) | Our design specification — the GW brand colours and typefaces, plus the OSCON palette, logo, and pattern rules. If you make anything for OSPO or OSCON, this is the rulebook. |
 | [`.claude/skills/gw-design-review/`](.claude/skills/gw-design-review/) | A design reviewer you can run on your own work before anyone else sees it. |
 
 ---
@@ -122,7 +122,7 @@ them over directly.
 
 Attach these files to your conversation, along with your design:
 
-- `DESIGN.md`
+- `.claude/skills/gw-design-review/brand/DESIGN.md`
 - `.claude/skills/gw-design-review/references/brand-checks.md`
 - `.claude/skills/gw-design-review/references/design-principles.md`
 - `.claude/skills/gw-design-review/references/report-format.md` — optional, but it's what
@@ -163,12 +163,21 @@ reading it is the best few hours you can spend if you'd like to stop needing the
 
 ## For maintainers
 
-`DESIGN.md` is the source of truth. The skill keeps a working copy of the brand values in
-`references/brand-checks.md` so reviews still work in a folder that has no `DESIGN.md`, and
-it is instructed to prefer a project's own `DESIGN.md` wherever the two disagree.
+Everything specific to GW lives in the skill's `brand/` folder:
 
-When `DESIGN.md` changes, check `references/brand-checks.md` for values that need to follow
-— and if a *rule* changes rather than a value, update the check, not just the number.
+| File | Role |
+|---|---|
+| `brand/DESIGN.md` | The design specification — the source of truth for brand rules |
+| `brand/palette.json` | The colours from `DESIGN.md` §1, for the scripts |
+| `brand/profile.md` | The institution, the brand contexts (OSCON vs general OSPO), and who reads the reviews |
+
+The skill prefers a project's own `DESIGN.md` wherever it disagrees with `brand/DESIGN.md`.
+
+When `DESIGN.md` changes:
+- If a colour changes, update `brand/palette.json` to match. `scripts/build-skill-zip.sh`
+  refuses to build if the two disagree.
+- Check `references/brand-checks.md` for values that need to follow — and if a *rule*
+  changes rather than a value, update the check, not just the number.
 
 ### Why the skill lives in `.claude/skills/`
 
@@ -252,7 +261,8 @@ python3 scripts/rasterize.py ~/Desktop/prospectus.pdf --pages 2-4
 and should be run on graphics rather than photographs — photographic content is exempt from
 the palette, and the script says so in its output. `rasterize.py` (and `palette_audit.py`
 on a PDF) needs one of pdftoppm, Ghostscript, `pip install pypdfium2`, or PyMuPDF; the
-error message says which to install. Add `--design path/to/DESIGN.md` to `contrast.py` or
-`palette_audit.py` to read the palette from a project's own `DESIGN.md`.
+error message says which to install. Both checkers read the palette from
+`brand/palette.json`; add `--design path/to/DESIGN.md` (or a `palette.json`) to use another
+project's palette instead.
 
 </details>

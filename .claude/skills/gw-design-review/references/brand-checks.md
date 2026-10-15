@@ -19,9 +19,9 @@ part is which.
 WCAG applies to digital assets. A print piece that will also circulate as a PDF or image is
 digital. For a print-only piece, apply the same contrast thresholds as house practice.
 
-**Source of truth:** if the project has its own `DESIGN.md`, read it and let it override
-anything here. Values below are a working copy so this skill functions outside the
-`gwospo-design` repository.
+**Source of truth:** the brand specification is `brand/DESIGN.md`, and the colour values
+below come from `brand/palette.json`. If the project being reviewed has its own `DESIGN.md`,
+read it and let it override anything here.
 
 ---
 

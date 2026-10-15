@@ -7,11 +7,12 @@ Usage
     python3 palette_audit.py prospectus.pdf                 every page (rendered first)
     python3 palette_audit.py slide.jpg --top 20 --min-share 0.5
     python3 palette_audit.py cover.png --include-neutral
-    python3 palette_audit.py cover.png --design DESIGN.md   use the project's palette
+    python3 palette_audit.py cover.png --design DESIGN.md   use a project's palette (.md or .json)
 
 What it does
 ------------
-Quantises the image, then for each dominant colour reports the nearest brand colour and
+Quantises the image, then for each dominant colour reports the nearest brand colour (from
+the skill's brand/palette.json unless --design is given) and
 the perceptual distance to it (CIE76 dE in Lab space):
 
     dE <  6   on palette (a match, or an imperceptible shift)
@@ -166,7 +167,8 @@ def main(argv):
     parser.add_argument("--include-neutral", action="store_true",
                         help="also report greys, which are skipped by default")
     parser.add_argument("--design", metavar="DESIGN.md",
-                        help="read the palette from the project's DESIGN.md")
+                        help="use a project's palette (DESIGN.md or palette.json) "
+                             "instead of the skill's brand/palette.json")
     parser.add_argument("--pages", metavar="N or A-B", help="PDF only: which pages (default: all)")
     args = parser.parse_args(argv[1:])
 
@@ -174,9 +176,9 @@ def main(argv):
         print(f"error: no such file: {args.path}", file=sys.stderr)
         return 2
 
-    palette, source = load_palette(args.design)
-    palette_lab = [(n, h, to_lab(parse_hex(h))) for n, h, _ in palette]
-    print(f"Palette: {source}")
+    pal = load_palette(args.design)
+    palette_lab = [(n, h, to_lab(parse_hex(h))) for n, h, _ in pal.colors]
+    print(f"Palette: {pal.source}")
     opts = dict(top=args.top, min_share=args.min_share, include_neutral=args.include_neutral)
 
     if is_pdf(args.path):
