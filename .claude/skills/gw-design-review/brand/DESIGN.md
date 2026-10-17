@@ -48,9 +48,18 @@ Three brand typefaces (all on Adobe Fonts):
 
 Rules:
 - Pair two typefaces per asset (three permissible, never required); mix weights for visual interest.
-- Web fallbacks: Gazzetta → 'Gazzetta', 'Avenir Next Condensed', 'Arial Narrow', sans-serif (condensed); Avenir Next → 'Avenir Next', 'Avenir', 'Segoe UI', sans-serif; Source Serif → 'Source Serif 4', Georgia, serif.
+- Free (Google Fonts) substitutes for when the Adobe Fonts licenses aren't available (web, partner and volunteer-made assets):
+  - **Source Serif → Source Serif 4.** This is the same Adobe open-source family, not a lookalike. Load it from Google Fonts and keep Georgia only as the load-failure fallback.
+  - **Avenir Next → Nunito Sans.** A geometric-humanist sans with similar proportions and a full variable weight range (200–1000) plus italics. It is slightly softer and rounder than Avenir, which suits OSCON's friendly tone.
+  - **Gazzetta → Barlow Condensed** (primary substitute). Condensed width, tall structure, 9 weights with true italics, and good mixed-case lowercase. Use **Oswald** only for heavy all-caps display moments (big numerals, short stamps). It is narrower and punchier, but it has no italics, its weights stop at 700, and its lowercase is weaker for long mixed-case headlines.
+  - Never mix substitutes with the originals in one asset. Pick one stack per asset.
+- CSS stacks:
+  - Display: `'Gazzetta', 'Barlow Condensed', 'Oswald', 'Arial Narrow', sans-serif`
+  - Sans: `'Avenir Next', 'Nunito Sans', 'Avenir', 'Segoe UI', sans-serif`
+  - Serif: `'Source Serif 4', 'Source Serif Pro', Georgia, serif`
+- Google Fonts embed: `https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;1,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;1,6..12,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Oswald:wght@500;700&display=swap`
+- Metric note: Barlow Condensed sets a bit wider than Gazzetta. Expect about 5% more width at the same size, so check that headline line breaks don't change when swapping.
 - Suggested scale (1920×1080 slides): Gazzetta display 96–160; Avenir Next subhead 36–48; body 24–28 (never below 24); captions 24.
-- Print minimum: body text no smaller than 9 pt at US Letter size.
 - Headline color: GW Blue on light grounds; white or Gold on GW Blue/Navy Yard.
 
 ## 3. Logo
@@ -58,8 +67,6 @@ Rules:
 - Structure: 2×3 tile grid — GW monogram + "2027" square in GW Blue, five glyph squares (Potomac, Row House, Gold, Orchid, Green) with white knockout shapes — beside the "OPEN SOURCE CONFERENCE" wordmark in GW Blue.
 - Knockouts are transparent: place on white or very light grounds only. A reversed/dark-ground variant does not exist yet.
 - Clear space: at least one tile-width (the grid square) on all sides; minimum width ~200 px on screen.
-- Place the logo as supplied, vector where possible: never stretch, recolor, rotate, outline, shadow, or rebuild it from parts.
-- In a multi-page document, place the logo on the cover and back cover only; a standalone piece carries it once. Do not repeat it on interior pages.
 
 ## 4. Pattern
 - File: `GW_OSCON_pattern_2027_B_extended.svg` (PNG: `GW_OSCON_pattern_2027_B_extended.png`, 4195×1680).
